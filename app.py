@@ -3,7 +3,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
 import argparse
 
-model_name_or_path = "TheBloke/Llama-2-13B-GPTQ"
+model_name_or_path = "TheBloke/Llama-2-13B-chat-GPTQ"
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
 
@@ -19,15 +19,11 @@ class InferlessPythonModel:
 
     def infer(self, inputs):
         prompt = inputs["prompt"]
-        prompt_template=f''' {prompt}
-
         
-        '''
         prompt_template=f'''[INST] <<SYS>>
-        You are a helpful, respectful, and honest assistant. Always answer as helpfully as possible, while being safe.
+        You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. 
         <</SYS>>
         {prompt}[/INST]
-        
         '''
         
         pipe = pipeline(
