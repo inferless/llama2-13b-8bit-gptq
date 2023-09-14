@@ -6,4 +6,6 @@ build:
     - "ffmpeg"
   python_packages:
     - "einops==0.6.1"
-    - "auto-gptq==0.3.0"
+    - "transformers>=4.32.0"
+    - "auto-gptq==0.4.2"
+    - "optimum>=1.12.0"
