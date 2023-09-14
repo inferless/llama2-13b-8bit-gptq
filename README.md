@@ -1,5 +1,5 @@
-# Vicuna13B GPTQ
-Vicuna GPTQ is a text generation model. You can use this template to import the model in Inferless.
+# LLama 2 13B HF - GPTQ 8Bit
+LLama 2 13B is a text generation model. You can use this template to import the model in Inferless.
 
 ---
 ## Prerequisites
