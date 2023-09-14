@@ -1,25 +1,19 @@
 import os
-from transformers import AutoTokenizer, pipeline, logging
-from auto_gptq import AutoGPTQForCausalLM, BaseQuantizeConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+import torch
 import argparse
 
-model_name_or_path = "TheBloke/Wizard-Vicuna-13B-Uncensored-SuperHOT-8K-GPTQ"
-model_basename = "wizard-vicuna-13b-uncensored-superhot-8k-GPTQ-4bit-128g.no-act.order"
+model_name_or_path = "TheBloke/Llama-2-13B-GPTQ"
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
 class InferlessPythonModel:
     def initialize(self):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=True)
-        self.model = AutoGPTQForCausalLM.from_quantized(model_name_or_path,
-            model_basename=model_basename,
-            use_safetensors=True,
-            trust_remote_code=True,
-            device_map='auto',
-            use_triton=True,
-            quantize_config=None
-        )
+        self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path,
+                                             torch_dtype=torch.float16,
+                                             device_map="auto",
+                                             revision="gptq-8bit-64g-actorder_True")
 
-        self.model.seqlen = 8192
 
     def infer(self, inputs):
         prompt = inputs["prompt"]
