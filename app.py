@@ -14,7 +14,7 @@ class InferlessPythonModel:
         self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path,
                                              torch_dtype=torch.float16,
                                              device_map="auto",
-                                             revision="gptq-8bit--1g-actorder_True")
+                                             revision="gptq-8bit-128g-actorder_True")
 
 
     def infer(self, inputs):
