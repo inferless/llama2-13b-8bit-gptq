@@ -20,8 +20,16 @@ class InferlessPythonModel:
     def infer(self, inputs):
         prompt = inputs["prompt"]
         prompt_template=f''' {prompt}
-        '''
 
+        
+        '''
+        prompt_template=f'''[INST] <<SYS>>
+        You are a helpful, respectful, and honest assistant. Always answer as helpfully as possible, while being safe.
+        <</SYS>>
+        {prompt}[/INST]
+        
+        '''
+        
         pipe = pipeline(
             "text-generation",
             model=self.model,
