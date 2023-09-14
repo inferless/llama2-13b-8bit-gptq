@@ -6,6 +6,8 @@ import argparse
 model_name_or_path = "TheBloke/Llama-2-13B-GPTQ"
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
+
+# New Model File
 class InferlessPythonModel:
     def initialize(self):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=True)
