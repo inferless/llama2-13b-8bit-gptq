@@ -1,4 +1,5 @@
 build:
+  cuda_version: "11.8.0"
   system_packages:
     - "libssl-dev"
     - "tesseract-ocr"
