@@ -6,7 +6,7 @@ build:
     - "libtesseract-dev"
     - "ffmpeg"
   python_packages:
-    - "pytorch==2.0.1"
+    - "torch==2.0.1"
     - "einops==0.6.1"
     - "transformers>=4.32.0"
     - "auto-gptq==0.4.2"
