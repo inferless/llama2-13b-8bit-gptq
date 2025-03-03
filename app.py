@@ -1,15 +1,17 @@
 import os
+os.environ["HF_HUB_ENABLE_HF_TRANSFER"]='1'
+from huggingface_hub import snapshot_download
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
 import argparse
-
-model_name_or_path = "TheBloke/Llama-2-13B-chat-GPTQ"
 os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
 
 # New Model File
 class InferlessPythonModel:
     def initialize(self):
+        model_id = "TheBloke/Llama-2-13B-chat-GPTQ"
+        snapshot_download(repo_id=model_id,allow_patterns=["*.safetensors"])
         self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=True)
         self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path,
                                              torch_dtype=torch.float16,
