@@ -12,8 +12,8 @@ class InferlessPythonModel:
     def initialize(self):
         model_id = "TheBloke/Llama-2-13B-chat-GPTQ"
         snapshot_download(repo_id=model_id,allow_patterns=["*.safetensors"])
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=True)
-        self.model = AutoModelForCausalLM.from_pretrained(model_name_or_path,
+        self.tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=True)
+        self.model = AutoModelForCausalLM.from_pretrained(model_id,
                                              torch_dtype=torch.float16,
                                              device_map="auto",
                                              revision="gptq-8bit-128g-actorder_True")
